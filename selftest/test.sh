@@ -1,0 +1,16 @@
+source ${SELFTEST_BASE}/openskope/base/test.sh
+
+echo "python2 version                 : $(python2 --version 2>&1 | tr -d '\n')"
+echo "python3 version                 : $(python3 --version 2>&1 | tr -d '\n')"
+echo "python default version          : $(python --version 2>&1 | tr -d '\n')"
+echo "pip2 version                    : $(pip2 --version 2>&1 | tr -d '\n')"
+echo "pip3 version                    : $(pip3 --version 2>&1 | tr -d '\n')"
+echo "pip default version             : $(pip --version 2>&1 | tr -d '\n')"
+echo "user PYTHONPATH                 : $PYTHONPATH"
+echo "user LD_LIBRARY_PATH            : $LD_LIBRARY_PATH"
+echo "numpy package version (python2) : $(pip2 show numpy | grep Version | awk '{print $2}')"
+echo "numpy package version (python3) : $(pip3 show numpy | grep Version | awk '{print $2}')"
+echo "gdal package version (python2)  : $(pip2 show gdal | grep Version | awk '{print $2}')"
+echo "gdal package version (python3)  : $(pip3 show gdal | grep Version | awk '{print $2}')"
+echo "gdallocationinfo version        : $(gdallocationinfo --version)"
+echo "gdal2tiles.py version           : $(gdal2tiles.py --version)"

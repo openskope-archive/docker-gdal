@@ -1,8 +1,10 @@
-from openskope/base:0.1.0
+from openskope/base:0.1.1
 
 ARG DEBIAN_FRONTEND=noninteractive
 USER root
- 
+
+ENV DOCKER_IMAGE_NAME openskope/gdal
+
 RUN echo '***** Install Python2, Python3, and pip for both *****'                                   \
  && apt-get -y install python python-pip python3 python3-pip                                        \
  && pip2 install --upgrade pip                                                                      \
@@ -37,5 +39,10 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/gdal/
 ENV PYTHONPATH=/opt/gdal/gdal-2.1.2/lib/python2.7/site-packages/
 
 USER skope
+
+ENV SELFTEST_DIR ${SELFTEST_BASE}/${DOCKER_IMAGE_NAME}
+COPY ./selftest/expected.txt ${SELFTEST_BASE}
+COPY ./selftest/test.sh ${SELFTEST_DIR}/
+RUN ${SELFTEST_BASE}/runtest.sh
 
 CMD echo "Usage: docker run openskope/gdal <gdal-command> [gdal-command-arguments]"
